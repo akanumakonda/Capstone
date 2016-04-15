@@ -11,7 +11,8 @@ import java.util.ArrayList;
 public class Doctor
 {
     /** description of instance variable x (add comment for each instance variable) */
-    private ArrayList<String> potentialDis;
+
+    private static ArrayList<String> potentialDis;
     /**
      * Default constructor for objects of class Doctor
      */
@@ -20,28 +21,45 @@ public class Doctor
         // initialise instance variables
         potentialDis = new ArrayList<String>();
     }
+
     public static void main( String[] args)
     {
-        Scanner s = new Scanner(System.out);
+        Scanner s = new Scanner(System.in);
         System.out.println("Please enter a symptom: ");
         String symptom = s.next();
         updateDiseases(symptom);
-        System.out.println("These are the potential diseases you might have");
-        for ( String Disease: potentialDis[])
+        try{
+            System.out.println("These are the potential diseases you might have");
+            for ( String Disease: potentialDis)
+            {
+                System.out.println(Disease);
+            }
+        }
+        catch (Exception NullPointerException)
         {
-            System.out.println(Disease);
+            System.out.println("You have no Potential Diseases");
         }
     }
-    public void updateDiseases(String symptom)
+
+    public static void updateDiseases(String symptom)
     {
         // put your code here 
-        Scanner in = new Scanner("Diseases.txt");
-        in.useDelimiter("[^A-Za-z]+");
-        
-        
-        // has next() in while loop
-        
-    }
+        File listOfDiseases = new File("Diseases.txt");
+        try {Scanner in = new Scanner(listOfDiseases);}
+        catch(Exception FileNotFoundException)
+        {System.out.println("Wrong File");}
+        while (in.hasNextLine())
+        {
+            String line = in.nextLine();
+            if ( line.contains(symptom.toUpperCase()) == true)
+            {
+                Scanner getDisease = new Scanner(line);
+                potentialDis.add(getDisease.next());
+            }
+        }
+        in.close();
+
+    // has next() in while loop
 
 }
-//read file 
+}
