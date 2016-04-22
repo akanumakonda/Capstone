@@ -1,14 +1,15 @@
 import java.util.Scanner;
 import java.io.File;
 import java.util.ArrayList;
-
+import java.lang.Exception;
+import java.io.FileNotFoundException;
 /**
  * Write a description of class Doctor here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Doctor
+public class Baymax
 {
     /** description of instance variable x (add comment for each instance variable) */
 
@@ -16,11 +17,11 @@ public class Doctor
     /**
      * Default constructor for objects of class Doctor
      */
-    public Doctor()
+    public Baymax()
     {
         // initialise instance variables
         potentialDis = new ArrayList<String>();
-    }
+    } 
 
     public static void main( String[] args)
     {
@@ -29,7 +30,7 @@ public class Doctor
         String symptom = s.next();
         updateDiseases(symptom);
         try{
-            System.out.println("These are the potential diseases you might have");
+            System.out.println("These are the Potential Diseases you might have");
             for ( String Disease: potentialDis)
             {
                 System.out.println(Disease);
@@ -45,21 +46,24 @@ public class Doctor
     {
         // put your code here 
         File listOfDiseases = new File("Diseases.txt");
-        try {Scanner in = new Scanner(listOfDiseases);}
-        catch(Exception FileNotFoundException)
-        {System.out.println("Wrong File");}
-        while (in.hasNextLine())
+        try
         {
-            String line = in.nextLine();
-            if ( line.contains(symptom.toUpperCase()) == true)
+            Scanner i = new Scanner(listOfDiseases);
+
+            while ( i.hasNextLine())
             {
-                Scanner getDisease = new Scanner(line);
-                potentialDis.add(getDisease.next());
+                String line = i.nextLine();
+                if ( line.contains(symptom.toUpperCase()) == true)
+                {
+                    Scanner getDisease = new Scanner(line);
+                    potentialDis.add(getDisease.next());
+                }
             }
+            i.close();
         }
-        in.close();
+        catch (Exception FileNotFoundException)
+        {System.out.println("No File");}
+        // has next() in while loop
 
-    // has next() in while loop
-
-}
+    }
 }
