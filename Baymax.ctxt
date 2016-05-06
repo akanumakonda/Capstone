@@ -8,4 +8,6 @@ comment2.params=symptom
 comment2.target=void\ updateDiseases(java.lang.String)
 comment3.params=s
 comment3.target=void\ narrowDown(java.util.Scanner)
-numComments=4
+comment4.params=
+comment4.target=void\ printOut()
+numComments=5

@@ -34,18 +34,9 @@ public class Baymax
         System.out.println("Please enter a symptom: ");
         String symptom = s.next();
         updateDiseases(symptom);
-        try{
-            System.out.println("These are the Potential Diseases you might have");
-            for ( String Disease: potentialDis)
-            {
-                System.out.println(Disease);
-            }
-        }
-        catch (Exception NullPointerException)
-        {
-            System.out.println("You have no Potential Diseases");
-        }
-         narrowDown(s);
+        printOut();
+        narrowDown(s);
+        printOut();
     }
 
     public static void updateDiseases(String symptom)
@@ -77,21 +68,40 @@ public class Baymax
         }
 
     }
+    
     public static void narrowDown(Scanner s)
     {
         System.out.println("Are you experiencing any other symptoms?");
         String ans = s.next();
-        if ( ans.contains("y"))
+        while ( ans.contains("y"))
         {
             System.out.println("What is your other symptom?");
             String symp = s.next();
             for (int i = 0; i < potentialSymp.size(); i++)
             {
-                if (symp.contains(symp) == false )
+                if (symp.contains(symp.toUpperCase()) == false )
                 {
                     potentialSymp.remove(i);
+                    potentialDis.remove(i);
                 }
             }
+            System.out.println("Are you experiencing any other symptoms?");
+            ans = s.next();
+        }
+    }
+    
+    public static void printOut()
+    {
+        try{
+            System.out.println("These are the Potential Diseases you might have");
+            for ( String Disease: potentialDis)
+            {
+                System.out.println(Disease);
+            }
+        }
+        catch (Exception NullPointerException)
+        {
+            System.out.println("You have no Potential Diseases");
         }
     }
 }
