@@ -25,8 +25,15 @@ public class Baymax
         // initialise instance variables
         potentialDis = new ArrayList<String>();
         potentialSymp = new ArrayList<String>();
-    } 
+    }
 
+
+    /**
+     * Main method that calls all other methods in class as needed
+     *
+     * @pre     All symptoms entered by user are spelled correctly
+     * @post    Prints out all possible diseases that might result in the inputed symptoms
+     */
     public static void main( String[] args)
     {
         Baymax doc = new Baymax();
@@ -39,10 +46,15 @@ public class Baymax
         printOut();
     }
 
+    /**
+     * Enters in all possible diseases the first symptom might be a result of
+     *
+     * @pre     Symptom is spelled correctly, with only one space between each word, and no punctuation
+     * @post    Update the arrayList potentialDis 
+     * @param   symptom   A String of the symptom
+     */
     public static void updateDiseases(String symptom)
     {
-        // put your code here 
-
         try
         {
             File listOfDiseases = new File("Diseases.txt");
@@ -69,6 +81,13 @@ public class Baymax
 
     }
     
+    /**
+     * Narrows down the ArrayList potentialDis, uses userinput for additional symptoms
+     *
+     * @post    Deletes all diseases that do not result in the specified symptom
+     * @param   s   A scanner object that reads user input
+
+     */
     public static void narrowDown(Scanner s)
     {
         System.out.println("Are you experiencing any other symptoms?");
@@ -90,6 +109,12 @@ public class Baymax
         }
     }
     
+    /**
+     *Prints out all Diseases in the ArrayListpotentialDis
+     *
+     * @pre     All instance variables are initialized
+     * @post    All the potential diseases are printed out
+     */
     public static void printOut()
     {
         try{
